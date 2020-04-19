@@ -1,4 +1,4 @@
-var searchData = $(".search-data")
+var searchData = (".search-data")
 var listOfCities = []
 var city
 var APIKey = "44b9b6b554c7e48d11ce4a78473fa25a";
@@ -18,28 +18,6 @@ function renderButtons() {
     }
 }
 
-$("#run-search").on("click", function () {
-    city = $("#search-term").value();
-    displayWeather()
-    display5day()
-})
-
-
-$(document).on("click", ".city-btn", function () {
-    city = $(this).attr("data-name");
-    displayWeather()
-    display5day()
-})
-
-
-$("#clear-search").on("click", function () {
-    localStorage.clear("cities")
-    listOfCities = []
-    $(".buttons-view").empty()
-
-    location.reload()
-})
-
 
 $(document).ready(function () {
     if (localStorage.getItem("cities") !== null) {
@@ -51,7 +29,7 @@ $(document).ready(function () {
     renderButtons()
 
     function displayWeather() {
-        var queryURL = "https://api.openweathermap.org/data/2.5/onecall?q=" + city + "&units=imperial&appid=" + APIKey + "&units=imperial";
+        var queryURL = "https://api.openweathermap.org/data/2.5/weather?q=" + city + "&units=imperial&appid=" + APIKey + "&units=imperial";
         $.ajax({
             url: queryURL,
             method: "GET"
@@ -91,7 +69,7 @@ $(document).ready(function () {
             var lon = response.coord.lon
             var lat = response.coord.lat
 
-            var uvIndexUrl = "http://api.openweathermap.org/data/2.5/onecall?appid=" + APIKey + "&lat=" + lat + "&lon=" + lon
+            var uvIndexUrl = "http://api.openweathermap.org/data/2.5/uvi?appid=" + APIKey + "&lat=" + lat + "&lon=" + lon
 
             $.ajax({
                 url: uvIndexUrl,
@@ -115,7 +93,7 @@ $(document).ready(function () {
 
     function display5day() {
 
-        var forcastURL = "https://api.openweathermap.org/data/2.5/onecall?q=" + city + "&appid=" + APIKey
+        var forcastURL = "https://api.openweathermap.org/data/2.5/forecast?q=" + city + "&appid=" + APIKey
 
         $(".fiveDayHeader").html("<h3>5 Day Forecast</h3>")
 
@@ -162,6 +140,28 @@ $(document).ready(function () {
                 $(".day5").html("<br/>" + "<b>" + moment(day5date).format("ddd, MMM Do") + "</b>" + "</br>" + "Temp: " + day5temp + " F </br>" + "Humidity: " + day5hum + " %")
             })
     }
+
+    $("#run-search").on("click", function () {
+        city = $("#search-term").val();
+        displayWeather()
+        display5day()
+    })
+
+
+    $(document).on("click", ".city-btn", function () {
+        city = $(this).attr("data-name");
+        displayWeather()
+        display5day()
+    })
+
+
+    $("#clear-search").on("click", function () {
+        localStorage.clear("cities")
+        listOfCities = []
+        $(".buttons-view").empty()
+
+        location.reload()
+    })
 
 
 
