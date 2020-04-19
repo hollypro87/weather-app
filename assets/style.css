@@ -1,6 +1,8 @@
 .jumbotron {
-  background: black;
-  color: black;
+  background-color: lightgray;
+  background-image: url("../images/clouds.jpeg");
+  background-size: cover;
+  color: teal;
   padding: 0;
 }
 .display-3 {
@@ -26,4 +28,10 @@
 #run-search,
 #clear-search {
   margin-top: 15px;
+}
+#run-search {
+  background-color: teal;
+}
+#clear-search {
+  background-color: gray;
 }
