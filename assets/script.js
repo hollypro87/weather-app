@@ -1,4 +1,4 @@
-var searchData = (".search-data")
+var searchData = $(".search-data")
 var listOfCities = []
 var city
 var APIKey = "44b9b6b554c7e48d11ce4a78473fa25a";
@@ -69,7 +69,7 @@ $(document).ready(function () {
             var lon = response.coord.lon
             var lat = response.coord.lat
 
-            var uvIndexUrl = "http://api.openweathermap.org/data/2.5/uvi?appid=" + APIKey + "&lat=" + lat + "&lon=" + lon
+            var uvIndexUrl = "http://api.openweathermap.org/data/2.5/uvi?appid=" + APIKey + "&lat=" + lat + "&lon=" + lon;
 
             $.ajax({
                 url: uvIndexUrl,
@@ -93,12 +93,12 @@ $(document).ready(function () {
 
     function display5day() {
 
-        var forcastURL = "https://api.openweathermap.org/data/2.5/forecast?q=" + city + "&appid=" + APIKey
+        var forecastURL = "https://api.openweathermap.org/data/2.5/forecast?q=" + city + "&appid=" + APIKey;
 
         $(".fiveDayHeader").html("<h3>5 Day Forecast</h3>")
 
         $.ajax({
-            url: forcastURL,
+            url: forecastURL,
             method: "GET"
         })
             .then(function (response) {
